@@ -1,4 +1,4 @@
-#Disaster detection via Twitter
+#Disaster Detection via Twitter
 
 This repository contains a predictive classification model I developed for determining if a Tweet is discussing a disaster event or not (i.e., building collapse, wildfire, terrorist attack) as a capstone project for the Data Science course offered at General Assembly in Austin, TX. The course was excellent and I highly recommend it to anyone interested. 
 
