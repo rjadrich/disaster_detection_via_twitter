@@ -58,12 +58,7 @@
 <li>Employ NLTK for initial tweet tokenization
 
 <ul>
-<li>Keep handles (username) and hashtags and reduce length (e.g., looooooovvvvveeee to looovvveee)
-
-<ul>
-<li>In general, the english language has at most three identical letters in a row</li>
-</ul>
-</li>
+<li>Keep handles (username) and hashtags and reduce length (e.g., looooooovvvvveeee to looovvveee)</li>
 </ul>
 </li>
 <li>Introduce special tokens
@@ -72,12 +67,7 @@
 <li>
 <strong>|-num-|</strong> for numbers (detect comma separation as in 1,000,000)</li>
 <li>
-<strong>|-num_alpha-|</strong> for mixed numerical and alphabetical (maybe useful for interstates, planes, trains, ...) 
-
-<ul>
-<li>Make sure not to convert handles! These are typically mixed numeric and alphabetic</li>
-</ul>
-</li>
+<strong>|-num_alpha-|</strong> for mixed numerical and alphabetical (interstates, planes, trains) but not handles </li>
 <li>
 <strong>|-num_units-|</strong> for zero, one, ..., ten</li>
 <li>
@@ -98,7 +88,7 @@
 <li>Stem words using NLTK Porter stemmer (e.g., fires becomes fire)</li>
 </ol>
 
-<p><strong>NOTE:</strong> stop words (i.e., high frequency words like "and") are not removed. Keeping them helps improve the final model performance--perhaps by allowing for better word-word relations to be encoded in the discovered "topics".</p>
+<p><strong>NOTE:</strong> stop words (like "and") are not removed as keeping them improves performance--perhaps by allowing for better word-word relations to be encoded in the discovered "topics".</p>
 
 <h3>
 <a id="3-mapping-low-frequency-words-onto-high-frequency-analogs" class="anchor" href="#3-mapping-low-frequency-words-onto-high-frequency-analogs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Mapping low frequency words onto high frequency analogs</h3>
@@ -111,9 +101,7 @@
 
 <p><strong>NOTE</strong>: low frequency words also encompass those with no occurrence (as in a new tweet outside of the dataset). Word2vec would be used to map in that case as well.</p>
 
-<p>For this I employ the pre-trained word2vec vectors from the Google News dataset. Word2vec is an unsupervised machine learning tool that creates vector representations of words by analyzing a large text corpus (here, Google News). Importantly, the similarity between two words can be quantified by the angle (theta in cartoon below) between the two word vectors.</p>
-
-<p>Mapping a low frequency <em>stemmed</em> token via word2vec amounts to finding the most similar high frequency <em>stemmed</em> token by comparing all base <em>unstemmed</em> words. This procedure is depicted in the following cartoon where arrows represent a mapping and some actual examples (from mapping procedure carried out below) are shown.</p>
+<p>I use the pre-trained word2vec vectors from the Google News data set to quantify the similarity between two words. Low frequency <em>stemmed</em> tokens are replaced by most similar high frequency <em>stemmed</em> token (see cartoon).</p>
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/images/mapping_procedure.png" alt="mapping_visual2"></p>
 
