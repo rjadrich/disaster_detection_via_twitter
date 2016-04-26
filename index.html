@@ -92,13 +92,30 @@
 <p><strong>NOTE:</strong> stop words (i.e., high frequency words like "and") are not removed. Keeping them helps improve the final model performance--perhaps by allowing for better word-word relations to be encoded in the discovered "topics".</p>
 
 <h3>
+<a id="3-mapping-low-frequency-words-onto-high-frequency-analogs" class="anchor" href="#3-mapping-low-frequency-words-onto-high-frequency-analogs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Mapping low frequency words onto high frequency analogs</h3>
+
+<hr>
+
+<p><strong>Low frequency words</strong>: occur <em>once</em> in the whole cleaned and tokenized tweet data set.</p>
+
+<p><strong>High frequency words</strong>: occur greater than <em>once</em> in the whole cleaned and tokenized tweet data set.</p>
+
+<p><strong>NOTE</strong>: low frequency words also encompass those with no occurrence (as in a new tweet outside of the dataset). Word2vec would be used to map in that case as well.</p>
+
+<p>For this I employ the pre-trained word2vec vectors from the Google News dataset. Word2vec is an unsupervised machine learning tool that creates vector representations of words by analyzing a large text corpus (here, Google News). Importantly, the similarity between two words can be quantified by the angle (theta in cartoon below) between the two word vectors.</p>
+
+<p>Mapping a low frequency <em>stemmed</em> token via word2vec amounts to finding the most similar high frequency <em>stemmed</em> token by comparing all base <em>unstemmed</em> words. This procedure is depicted in the following cartoon where arrows represent a mapping and some actual examples (from mapping procedure carried out below) are shown.</p>
+
+<p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/images/mapping_procedure.png" alt="mapping_visual2"></p>
+
+<h3>
 <a id="6-decide-on-a-model-dimensionality-and-check-accuracy" class="anchor" href="#6-decide-on-a-model-dimensionality-and-check-accuracy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6. Decide on a model dimensionality and check accuracy</h3>
 
 <hr>
 
 <p><strong>Model used</strong>: logistic regression (see: <a href="https://en.wikipedia.org/wiki/Logistic_regression">https://en.wikipedia.org/wiki/Logistic_regression</a>).</p>
 
-<p><strong>Why</strong>: logistic regression is one of the simplest models (linear in the features), making it particularly well suited to high dimensional problems. As dimensionality increases linear separability of the classes improves. Additionally, such highly constrained models suffer little from the so called "curse of dimensionality" which plagues weakly constrained models such as k-nearest neighbors (see <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">https://en.wikipedia.org/wiki/Curse_of_dimensionality</a> for details on this phenomenon).</p>
+<p><strong>Why</strong>: well suited to high dimensional problems.</p>
 
 <p><strong>Two tests across a range of dimensions</strong>:</p>
 
@@ -136,6 +153,9 @@
 <p><code>Topic 10: -0.463*"!" + -0.321*"obama" + -0.312*"declar" + -0.287*"disast" + -0.208*"for" + -0.200*"@" + -0.185*"saipan" + -0.184*"typhoon" + 0.180*"." + -0.166*"devast"</code></p>
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/topics.png" alt="Topics"></p>
+
+<h3>
+<a id="8-proposed-work" class="anchor" href="#8-proposed-work" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>8. Proposed work</h3>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/rjadrich/disaster_detection_via_twitter">Disaster detection via twitter</a> is maintained by <a href="https://github.com/rjadrich">rjadrich</a>.</span>
