@@ -26,7 +26,7 @@
 
 <p><strong>Goal:</strong> Create a predictive model to classify a tweet as pertaining to a disaster event or not, <em>solely</em> based on the tweet text.</p>
 
-<p><strong>Data:</strong> 10,876 classified tweet entries in the "Disasters on Social Media" data set from CrowdFlower at <a href="http://www.crowdflower.com/data-for-everyone">http://www.crowdflower.com/data-for-everyone</a>. Some examples of disasters include structural collapses, wildfires and terrorist attacks. However, this dataset also encompasses more "minor" events such as car accidents, etc. These were compiled by searching for tweets with disaster related keywords (i.e., hijacking, hurricane, and explosion) and then they were classified as "Relevant", "Not Relevant" or "Can't Decide" with "Relevant" indicating a disaster.</p>
+<p><strong>Data:</strong> 10,876 classified tweet entries in the "Disasters on Social Media" data set from CrowdFlower at <a href="http://www.crowdflower.com/data-for-everyone">http://www.crowdflower.com/data-for-everyone</a>. These were compiled by searching for tweets with disaster related keywords (i.e., hijacking, hurricane, and explosion) and then they were classified.</p>
 
 <p><strong>Machine learning tools</strong> </p>
 
@@ -35,6 +35,61 @@
 <li><p><strong>GENSIM</strong> - For seamless transformation from a high dimensional "bag of words" (BOW) feature space to a lower dimensional "topic" space (each topic expresses discovered relations amongst the words in the Tweet data set using Latent Semantic Indexing or LSI).</p></li>
 <li><p><strong>Scikit-Learn</strong> - For trivial implementation the final Logistic Regression model which predicts "disaster" or "not disaster" based on each Tweets "topic" representation.</p></li>
 </ol>
+
+<h3>
+<a id="2-clean-and-tokenize-all-the-tweets" class="anchor" href="#2-clean-and-tokenize-all-the-tweets" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Clean and tokenize all the tweets</h3>
+
+<hr>
+
+<ol>
+<li>Convert hyphens and apostrophes from utf8 to ascii</li>
+<li>Remove all remaining utf8 characters</li>
+<li>Clean any HTML tags using HTMLParser module</li>
+<li>Break on hyphens</li>
+<li>Employ NLTK for initial tweet tokenization
+
+<ul>
+<li>Keep handles (username) and hashtags and reduce length (e.g., looooooovvvvveeee to looovvveee)
+
+<ul>
+<li>In general, the english language has at most three identical letters in a row</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Introduce special tokens
+
+<ul>
+<li>
+<strong>|-num-|</strong> for numbers (detect comma separation as in 1,000,000)</li>
+<li>
+<strong>|-num_alpha-|</strong> for mixed numerical and alphabetical (maybe useful for interstates, planes, trains, ...) 
+
+<ul>
+<li>Make sure not to convert handles! These are typically mixed numeric and alphabetic</li>
+</ul>
+</li>
+<li>
+<strong>|-num_units-|</strong> for zero, one, ..., ten</li>
+<li>
+<strong>|-num_tens-|</strong> for ten, twenty, ..., ninety</li>
+<li>
+<strong>|-num_scales-|</strong> for hundred, thousand, ..., billion</li>
+<li>
+<strong>|-website-|</strong> for any hyperlinks</li>
+</ul>
+</li>
+<li>Simplify common face emoticons down to just eyes and mouth (nose does not really convey emotion) and normalize (eyes first mouth second)
+
+<ul>
+<li>Most common eyes : ; = 8</li>
+<li>Most common mouths ( ) [ ] d p { } / @ |</li>
+</ul>
+</li>
+<li>Stem words using NLTK Porter stemmer (e.g., fires becomes fire)</li>
+</ol>
+
+<p><strong>NOTE:</strong> stop words (i.e., high frequency words like "and") are not removed. Keeping them helps improve the final model performance--perhaps by allowing for better word-word relations to be encoded in the discovered "topics".</p>
 
 <h3>
 <a id="8-check-out-the-topics" class="anchor" href="#8-check-out-the-topics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>8. Check out the "topics"</h3>
