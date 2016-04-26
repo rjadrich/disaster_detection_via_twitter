@@ -143,19 +143,9 @@
 
 <p><strong>Why</strong>: well suited to high dimensional problems.</p>
 
-<p><strong>Two tests across a range of dimensions</strong>:</p>
-
-<ol>
-<li>k-fold cross validation error to assess how well the model will generalize to new tweets.
-
-<ul>
-<li>Unfortunately this does not account well for testing generalizability to tweets with new (non-dictionary) tokens. Ideally, the word2vec mapping will remedy the relatively small dictionary.</li>
-</ul>
-</li>
-<li>Training error to fit the whole dataset.</li>
-</ol>
-
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/cross_validation.png" alt="cross validation"></p>
+
+<p><strong>Conclusion</strong>: Overall, D=250 seems good and is the dimensionality employed from here onward.</p>
 
 <h3>
 <a id="7-make-and-test-a-model-with-desired-dimensionality" class="anchor" href="#7-make-and-test-a-model-with-desired-dimensionality" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7. Make and test a model with desired dimensionality</h3>
@@ -169,8 +159,6 @@
 <li>This checks how well the model "separates" the two classes by plotting the "true positive rate" vs the "false positive rate" while moving the probability cutoff for classifying into one of the two categories (the default for classification is 50%).</li>
 </ul>
 </li>
-<li>Calculate various scores (train and test accuracies as well as the F1 score)</li>
-<li>Generate a confusion matrix to see where the model goes wrong in classification</li>
 </ol>
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/roc.png" alt="ROC analysis"></p>
