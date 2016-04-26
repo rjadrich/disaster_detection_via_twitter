@@ -92,6 +92,29 @@
 <p><strong>NOTE:</strong> stop words (i.e., high frequency words like "and") are not removed. Keeping them helps improve the final model performance--perhaps by allowing for better word-word relations to be encoded in the discovered "topics".</p>
 
 <h3>
+<a id="6-decide-on-a-model-dimensionality-and-check-accuracy" class="anchor" href="#6-decide-on-a-model-dimensionality-and-check-accuracy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6. Decide on a model dimensionality and check accuracy</h3>
+
+<hr>
+
+<p><strong>Model used</strong>: logistic regression (see: <a href="https://en.wikipedia.org/wiki/Logistic_regression">https://en.wikipedia.org/wiki/Logistic_regression</a>).</p>
+
+<p><strong>Why</strong>: logistic regression is one of the simplest models (linear in the features), making it particularly well suited to high dimensional problems. As dimensionality increases linear separability of the classes improves. Additionally, such highly constrained models suffer little from the so called "curse of dimensionality" which plagues weakly constrained models such as k-nearest neighbors (see <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">https://en.wikipedia.org/wiki/Curse_of_dimensionality</a> for details on this phenomenon).</p>
+
+<p><strong>Two tests across a range of dimensions</strong>:</p>
+
+<ol>
+<li>k-fold cross validation error to assess how well the model will generalize to new tweets.
+
+<ul>
+<li>Unfortunately this does not account well for testing generalizability to tweets with new (non-dictionary) tokens. Ideally, the word2vec mapping will remedy the relatively small dictionary.</li>
+</ul>
+</li>
+<li>Training error to fit the whole dataset.</li>
+</ol>
+
+<p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/cross_validation.png" alt="cross validation"></p>
+
+<h3>
 <a id="8-check-out-the-topics" class="anchor" href="#8-check-out-the-topics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>8. Check out the "topics"</h3>
 
 <hr>
