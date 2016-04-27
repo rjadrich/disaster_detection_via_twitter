@@ -66,6 +66,7 @@
 <ul>
 <li>Keep handles (username) and hashtags and reduce length (e.g., looooooovvvvveeee to looovvveee)</li>
 <li>@ and # are separated from text</li>
+<li>Split # text according to normal format (#CarCrash or #TexasTornado)</li>
 </ul>
 </li>
 <li>Introduce special tokens
@@ -208,9 +209,14 @@
 <p><strong>Parsing conjoined words</strong> (common to hashtags and "lazy" tweeters)</p>
 
 <ol>
-<li>Build a large dictionary using google book n-grams</li>
-<li>Recursively generate word splits</li>
+<li>Use Google book n-grams as a dictionary and to calculate word probabilities P(w)</li>
+<li>Recursively generate possible word splits </li>
+<li>Maximum likelihood monogram model: log[P(w1, w2, ..., wN)] = log[P(w1)] + log[P(w2)] + ... + log[P(wN)]</li>
+<li>Special token for failure: <strong>|-no_parse-|</strong>
+</li>
 </ol>
+
+<p><strong>Spell checking</strong> (again, "lazy" tweeters)</p>
 
 <p>appear in tweets, (2) spell checking for sparsity reduction combined with introduction of a special token to indicate
 a misspelling and (3) recognition of relevant named entities, e.g., news sources like NBC or CNN which may be
