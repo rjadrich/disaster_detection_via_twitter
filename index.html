@@ -43,8 +43,8 @@
 
 <ol>
 <li><p><strong>Natural Language Toolkit (NLTK)</strong> - For initial preprocessing and tokenization of tweets using the nltk.tokenize package.</p></li>
-<li><p><strong>GENSIM</strong> - For seamless transformation from a high dimensional "bag of words" (BOW) feature space to a lower dimensional "topic" space via Latent Semantic Indexing or LSI.</p></li>
-<li><p><strong>Scikit-Learn</strong> - Fitting of final Logistic Regression classification model to "topics" represented tweets.</p></li>
+<li><p><strong>GENSIM</strong> - For transforming the high dimensional "bag of words" (BOW) feature space to a lower dimensional "topic" space via Latent Semantic Indexing or LSI.</p></li>
+<li><p><strong>Scikit-Learn</strong> - Fitting of final Logistic Regression classification model to tweets in "topic" form.</p></li>
 </ol>
 
 <p> </p>
@@ -65,6 +65,7 @@
 
 <ul>
 <li>Keep handles (username) and hashtags and reduce length (e.g., looooooovvvvveeee to looovvveee)</li>
+<li>@ and # are separated from text</li>
 </ul>
 </li>
 <li>Introduce special tokens
@@ -109,7 +110,7 @@
 
 <p><strong>High frequency words</strong>: occur greater than <em>once</em> in the whole cleaned and tokenized tweet data set.</p>
 
-<p>Employ pre-trained <strong>word2vec</strong> vectors from the Google News data set to quantify the similarity between two words. Low frequency <em>stemmed</em> tokens are replaced by most similar high frequency <em>stemmed</em> token (see cartoon).</p>
+<p>Leverage word2vec and pre-trained Google News vectors to quantify the similarity between two words. Low frequency <em>stemmed</em> tokens are replaced by most similar high frequency <em>stemmed</em> token (see cartoon).</p>
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/images/mapping_procedure.png" alt="mapping_visual2"></p>
 
@@ -120,7 +121,7 @@
 <hr>
 
 <h3>
-<a id="4-tweet-topic-generation" class="anchor" href="#4-tweet-topic-generation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4. Tweet "topic" generation</h3>
+<a id="4-tweet-topic-generation" class="anchor" href="#4-tweet-topic-generation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4. Tweet topic generation</h3>
 
 <hr>
 
@@ -128,16 +129,16 @@
 
 <ol>
 <li>
-<strong>Bag of words (BOW)</strong>:  tweet vectors like [1,0,0,2,4,0,...,0] where each count specifies how many time a certain token appears in a tweet (sparse, i.e., mostly full of 0's). Please see <a href="https://en.wikipedia.org/wiki/Bag-of-words_model">https://en.wikipedia.org/wiki/Bag-of-words_model</a> for more details.</li>
+<strong>Bag of words (BOW)</strong>:  vectors like [1,0,0,2,4,0,...,0] where each count specifies how many time a certain token appears in a tweet (sparse, i.e., mostly full of 0's).</li>
 <li>
-<strong>Term frequency–inverse document frequency (TFIDF)</strong>: rescaled BOW vectors where each word count is penalized (shrunk) in accord with how many of the documents contains the word (measure of uniqueness). Please see <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">https://en.wikipedia.org/wiki/Tf%E2%80%93idf</a> for more details.</li>
+<strong>Term frequency–inverse document frequency (TFIDF)</strong>: rescaled BOW vectors where each word count is penalized (shrunk) in accord with how many of the documents contains the word (measure of uniqueness).</li>
 <li>
-<strong>Latent semantic indexing (LSI)</strong>: constructs user specified number of "topics" (linear combinations of the old TFIDF dimensions). These are constructed so so as to describe as much variance in the data as possible. Please see for <a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis">https://en.wikipedia.org/wiki/Latent_semantic_analysis</a> more details.</li>
+<strong>Latent semantic indexing (LSI)</strong>: constructs <em>user specified</em> number of "topics" (linear combinations of the old TFIDF dimensions). These are constructed so so as to describe as much variance in the data as possible. </li>
 </ol>
 
-<p><strong>Dictionary</strong>: uses all the tweets to get maximal word recognition. Tokens that appear only once are excluded.</p>
+<p><strong>Dictionary</strong>: tokens from <em>all</em> the tweets for get maximal word recognition. Tokens that appear only once are excluded.</p>
 
-<p><strong>Corpus</strong>: only uses tweets of 100% confidence in classification to maximize reliability (some of the tweets with less than 100% appeared incorrectly labeled upon personal inspection).</p>
+<p><strong>Corpus</strong>: only tweets of 100% confidence in classification to maximize reliability (some tweets with &lt;100% appeared incorrectly labeled upon personal inspection).</p>
 
 <p> </p>
 
@@ -148,13 +149,11 @@
 
 <hr>
 
-<p><strong>Model used</strong>: logistic regression (see: <a href="https://en.wikipedia.org/wiki/Logistic_regression">https://en.wikipedia.org/wiki/Logistic_regression</a>).</p>
-
-<p><strong>Why</strong>: well suited to high dimensional problems.</p>
+<p><strong>Model used</strong>: logistic regression (well suited to high dimensional problems).</p>
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/cross_validation.png" alt="cross validation"></p>
 
-<p><strong>Conclusion</strong>: Overall, D=250 seems good and is the dimensionality employed from here onward.</p>
+<p><strong>Conclusion</strong>: Overall, D=250 seems good. I use this dimensionality from here onward.</p>
 
 <p> </p>
 
@@ -176,7 +175,7 @@
 <hr>
 
 <h3>
-<a id="7-check-out-the-topics" class="anchor" href="#7-check-out-the-topics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7. Check out the "topics"</h3>
+<a id="7-explore-the-topics" class="anchor" href="#7-explore-the-topics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7. Explore the topics</h3>
 
 <hr>
 
