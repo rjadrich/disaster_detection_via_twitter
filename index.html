@@ -52,7 +52,7 @@
 <hr>
 
 <h3>
-<a id="2-clean-and-tokenize-all-the-tweets" class="anchor" href="#2-clean-and-tokenize-all-the-tweets" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Clean and tokenize all the tweets</h3>
+<a id="2-tweet-preparation" class="anchor" href="#2-tweet-preparation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Tweet preparation</h3>
 
 <hr>
 
@@ -101,7 +101,7 @@
 <hr>
 
 <h3>
-<a id="3-mapping-low-frequency-words-onto-high-frequency-analogs" class="anchor" href="#3-mapping-low-frequency-words-onto-high-frequency-analogs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Mapping low frequency words onto high frequency analogs</h3>
+<a id="3-mapping-uncommon-words" class="anchor" href="#3-mapping-uncommon-words" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Mapping uncommon words</h3>
 
 <hr>
 
@@ -120,7 +120,7 @@
 <hr>
 
 <h3>
-<a id="4-converting-tweets-into-features-for-modeling" class="anchor" href="#4-converting-tweets-into-features-for-modeling" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4. Converting tweets into features for modeling</h3>
+<a id="4-tweet-topic-generation" class="anchor" href="#4-tweet-topic-generation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4. Tweet "topic" generation</h3>
 
 <hr>
 
@@ -132,7 +132,7 @@
 <li>
 <strong>Term frequency–inverse document frequency (TFIDF)</strong>: rescaled BOW vectors where each word count is penalized (shrunk) in accord with how many of the documents contains the word (measure of uniqueness). Please see <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">https://en.wikipedia.org/wiki/Tf%E2%80%93idf</a> for more details.</li>
 <li>
-<strong>Latent semantic indexing (LSI)</strong>: constructs user specified number of "Topics" (linear combinations of the old TFIDF dimensions). These are constructed so so as to describe as much variance in the data as possible. Please see for <a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis">https://en.wikipedia.org/wiki/Latent_semantic_analysis</a> more details.</li>
+<strong>Latent semantic indexing (LSI)</strong>: constructs user specified number of "topics" (linear combinations of the old TFIDF dimensions). These are constructed so so as to describe as much variance in the data as possible. Please see for <a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis">https://en.wikipedia.org/wiki/Latent_semantic_analysis</a> more details.</li>
 </ol>
 
 <p><strong>Dictionary</strong>: uses all the tweets to get maximal word recognition. Tokens that appear only once are excluded.</p>
@@ -144,7 +144,7 @@
 <hr>
 
 <h3>
-<a id="5-decide-on-a-model-dimensionality-and-check-accuracy" class="anchor" href="#5-decide-on-a-model-dimensionality-and-check-accuracy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5. Decide on a model dimensionality and check accuracy</h3>
+<a id="5-accuracy-and-number-of-topics" class="anchor" href="#5-accuracy-and-number-of-topics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5. Accuracy and number of topics</h3>
 
 <hr>
 
@@ -161,11 +161,11 @@
 <hr>
 
 <h3>
-<a id="6-make-and-test-a-model-with-desired-dimensionality" class="anchor" href="#6-make-and-test-a-model-with-desired-dimensionality" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6. Make and test a model with desired dimensionality</h3>
+<a id="6-model-class-separability" class="anchor" href="#6-model-class-separability" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6. Model class separability</h3>
 
 <hr>
 
-<p><strong>Test class separability</strong>: create a k-fold receiver operating characteristic (ROC) curve (see: <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">https://en.wikipedia.org/wiki/Receiver_operating_characteristic</a> for more details).</p>
+<p><strong>Receiver operating characteristic (ROC) curve:</strong></p>
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/roc.png" alt="ROC analysis"></p>
 
@@ -182,8 +182,6 @@
 
 <p><strong>Top 10 topics with the top ten tokens</strong></p>
 
-<p></p>
-
 <p><code>Topic 0: 0.426*"?" + 0.234*"#" + 0.205*"@" + 0.196*"|-no_w2v-|" + 0.188*"'" + 0.185*"." + 0.183*"the" + 0.160*"|-num-|" + 0.158*"i" + 0.156*"a"</code></p>
 
 <p><code>Topic 1: -0.808*"?" + 0.160*"|-num-|" + 0.159*"'" + 0.148*":" + 0.127*"#" + 0.110*"of" + 0.107*"in" + 0.096*"|-website-|" + 0.093*"famili" + 0.093*"..."</code></p>
@@ -194,8 +192,6 @@
 <p><code>Topic 9: -0.242*"kill" + 0.231*"#" + 0.222*"!" + 0.212*"|-num_alpha-|" + -0.208*"obama" + -0.203*"declar" + -0.203*"disast" + -0.173*"|-num_units-|" + 0.167*"bomb" + -0.150*"for"</code></p>
 
 <p><code>Topic 10: -0.463*"!" + -0.321*"obama" + -0.312*"declar" + -0.287*"disast" + -0.208*"for" + -0.200*"@" + -0.185*"saipan" + -0.184*"typhoon" + 0.180*"." + -0.166*"devast"</code></p>
-
-<p></p>
 
 <p><strong>Topic 1 = non-disaster and  Topic 2 = disaster???</strong></p>
 
