@@ -92,6 +92,8 @@
 
 <p><strong>NOTE:</strong> stop words (like "and") are not removed as keeping them improves performance--perhaps by allowing for better word-word relations to be encoded in the discovered "topics".</p>
 
+<p> </p>
+
 <h3>
 <a id="3-mapping-low-frequency-words-onto-high-frequency-analogs" class="anchor" href="#3-mapping-low-frequency-words-onto-high-frequency-analogs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Mapping low frequency words onto high frequency analogs</h3>
 
@@ -104,6 +106,8 @@
 <p>Employ pre-trained <strong>word2vec</strong> vectors from the Google News data set to quantify the similarity between two words. Low frequency <em>stemmed</em> tokens are replaced by most similar high frequency <em>stemmed</em> token (see cartoon).</p>
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/images/mapping_procedure.png" alt="mapping_visual2"></p>
+
+<p> </p>
 
 <h3>
 <a id="4-converting-tweets-into-features-for-modeling" class="anchor" href="#4-converting-tweets-into-features-for-modeling" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4. Converting tweets into features for modeling</h3>
@@ -125,6 +129,8 @@
 
 <p><strong>Corpus</strong>: only uses tweets of 100% confidence in classification to maximize reliability (some of the tweets with less than 100% appeared incorrectly labeled upon personal inspection).</p>
 
+<p> </p>
+
 <h3>
 <a id="5-decide-on-a-model-dimensionality-and-check-accuracy" class="anchor" href="#5-decide-on-a-model-dimensionality-and-check-accuracy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5. Decide on a model dimensionality and check accuracy</h3>
 
@@ -138,8 +144,10 @@
 
 <p><strong>Conclusion</strong>: Overall, D=250 seems good and is the dimensionality employed from here onward.</p>
 
+<p> </p>
+
 <h3>
-<a id="7-make-and-test-a-model-with-desired-dimensionality" class="anchor" href="#7-make-and-test-a-model-with-desired-dimensionality" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7. Make and test a model with desired dimensionality</h3>
+<a id="6-make-and-test-a-model-with-desired-dimensionality" class="anchor" href="#6-make-and-test-a-model-with-desired-dimensionality" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6. Make and test a model with desired dimensionality</h3>
 
 <hr>
 
@@ -149,8 +157,10 @@
 
 <p><strong>NOTE</strong>: May want to tune threshold towards more false disaster predictions (better safe than sorry).</p>
 
+<p> </p>
+
 <h3>
-<a id="8-check-out-the-topics" class="anchor" href="#8-check-out-the-topics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>8. Check out the "topics"</h3>
+<a id="7-check-out-the-topics" class="anchor" href="#7-check-out-the-topics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7. Check out the "topics"</h3>
 
 <hr>
 
@@ -170,6 +180,8 @@
 <p><strong>Topic 1 = non-disaster and  Topic 2 = disaster???</strong></p>
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/topics.png" alt="Topics"></p>
+
+<p> </p>
 
 <h3>
 <a id="8-proposed-work" class="anchor" href="#8-proposed-work" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>8. Proposed work</h3>
