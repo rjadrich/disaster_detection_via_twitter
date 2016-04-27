@@ -141,18 +141,11 @@
 
 <hr>
 
-<ol>
-<li>Create a k-fold receiver operating characteristic (ROC) curve (see: <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">https://en.wikipedia.org/wiki/Receiver_operating_characteristic</a> for more details).
-
-<ul>
-<li>This checks how well the model "separates" the two classes by plotting the "true positive rate" vs the "false positive rate" while moving the probability cutoff for classifying into one of the two categories (the default for classification is 50%).</li>
-</ul>
-</li>
-</ol>
+<p><strong>Test class separability</strong>: create a k-fold receiver operating characteristic (ROC) curve (see: <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">https://en.wikipedia.org/wiki/Receiver_operating_characteristic</a> for more details).</p>
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/roc.png" alt="ROC analysis"></p>
 
-<p>The ROC analysis suggests the model does a good job at separating out the classes. </p>
+<p><strong>NOTE</strong>: May want to tune threshold towards more false disaster predictions (better safe than sorry).</p>
 
 <h3>
 <a id="8-check-out-the-topics" class="anchor" href="#8-check-out-the-topics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>8. Check out the "topics"</h3>
@@ -172,9 +165,7 @@
 
 <p><code>Topic 10: -0.463*"!" + -0.321*"obama" + -0.312*"declar" + -0.287*"disast" + -0.208*"for" + -0.200*"@" + -0.185*"saipan" + -0.184*"typhoon" + 0.180*"." + -0.166*"devast"</code></p>
 
-<p><strong>Topic 1 = non-disaster?  |  Topic 2 = disaster?</strong></p>
-
-<p>Lets see:</p>
+<p><strong>Topic 1 = non-disaster and  Topic 2 = disaster???</strong></p>
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/topics.png" alt="Topics"></p>
 
