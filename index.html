@@ -114,29 +114,14 @@
 <li>
 <strong>Bag of words (BOW)</strong>:  tweet vectors like [1,0,0,2,4,0,...,0] where each count specifies how many time a certain token appears in a tweet (sparse, i.e., mostly full of 0's). Please see <a href="https://en.wikipedia.org/wiki/Bag-of-words_model">https://en.wikipedia.org/wiki/Bag-of-words_model</a> for more details.</li>
 <li>
-<strong>Term frequency–inverse document frequency (TFIDF)</strong>: rescaled BOW vectors where each word count is penalized (shrunk) in accord with how many of the documents contains the word--effectively adjusting the word counts for how unique each word is. For example, "and" will be heavily penalized, reflecting low information content and common usage. Since this is just a rescaling of each BOW element the new vectors are of the same <em>high</em> dimensionality. Please see <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">https://en.wikipedia.org/wiki/Tf%E2%80%93idf</a> for more details.</li>
+<strong>Term frequency–inverse document frequency (TFIDF)</strong>: rescaled BOW vectors where each word count is penalized (shrunk) in accord with how many of the documents contains the word (measure of uniqueness). Please see <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">https://en.wikipedia.org/wiki/Tf%E2%80%93idf</a> for more details.</li>
 <li>
-<strong>Latent semantic indexing (LSI)</strong>: through a standard mathematical scheme from linear algebra--singular value decomposition (SVD--the TFIDF vectors are mapped onto a user specified, smaller dimensional space where the new dimensions are linear combinations of the old TFIDF dimensions. These new dimensions (commonly called "topics") are constructed so that they describe as much variance in the data as possible with rapidly diminishing returns for each new dimension. The outcome is a much more compact vectorial representation of each tweet. Please see for <a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis">https://en.wikipedia.org/wiki/Latent_semantic_analysis</a> more details.</li>
+<strong>Latent semantic indexing (LSI)</strong>: constructs user specified number of "Topics" (linear combinations of the old TFIDF dimensions). These are constructed so so as to describe as much variance in the data as possible. Please see for <a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis">https://en.wikipedia.org/wiki/Latent_semantic_analysis</a> more details.</li>
 </ol>
 
-<p><strong>Workflow</strong>
-1. Create a dictionary and corpus</p>
+<p><strong>Dictionary</strong>: uses all the tweets to get maximal word recognition. Tokens that appear only once are excluded.</p>
 
-<ul>
-<li>Dictionary: use words from all of the tweets for more tokens</li>
-<li>Corpus: composed of the tweets with the greatest certainty in their classification. Convert to a BOW representation using the dictionary and then to a TFIDF analog.
-
-<ol>
-<li>Create LSI features data frame of desired dimensionality from the dictionary and TFIDF tweet corpus (the dictionary just relates the new features to the actual words and is not really part of the dimensionality reduction)</li>
-</ol>
-</li>
-</ul>
-
-<p><strong>Create data frames for constructing the dictionary and corpus</strong></p>
-
-<p><strong>Dictionary</strong>: use all the tweets to get maximal word recognition, thus maximizing generalizability to new tweets. Tokens that appear only once are excluded.</p>
-
-<p><strong>Corpus</strong>: only employ tweets of 100% confidence in classification to ensure the reliability of the predictive model. Some of the tweets with less than 100% appeared incorrectly labeled upon personal inspection.</p>
+<p><strong>Corpus</strong>: only uses tweets of 100% confidence in classification to maximize reliability (some of the tweets with less than 100% appeared incorrectly labeled upon personal inspection).</p>
 
 <h3>
 <a id="5-decide-on-a-model-dimensionality-and-check-accuracy" class="anchor" href="#5-decide-on-a-model-dimensionality-and-check-accuracy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5. Decide on a model dimensionality and check accuracy</h3>
