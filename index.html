@@ -204,6 +204,23 @@
 <a id="8-improving-tokenization" class="anchor" href="#8-improving-tokenization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>8. Improving Tokenization</h3>
 
 <hr>
+
+<p>This is arguably the most important part!</p>
+
+<ol>
+<li>Parsing for conjoined words (common in hashtags and "lazy" tweeters)</li>
+</ol>
+
+<p>Recursive </p>
+
+<p>appear in tweets, (2) spell checking for sparsity reduction combined with introduction of a special token to indicate
+a misspelling and (3) recognition of relevant named entities, e.g., news sources like NBC or CNN which may be
+particularly relevant to disasters. Combined, the various steps I have proposed should lead to an enhanced
+predictive model with greater generalizability. This will be explicitly tested on a small, (of order 100) untrained, selflabeled
+set of tweets with high temporal and disaster type variation. The final pipeline of tweet &gt;
+tokens &gt;
+topics &gt;
+prediction will be encoded in an online Heroku app that will monitor Twitter via its API and search feature.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/rjadrich">rjadrich</a></p>
