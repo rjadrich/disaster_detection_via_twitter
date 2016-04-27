@@ -41,8 +41,8 @@
 
 <ol>
 <li><p><strong>Natural Language Toolkit (NLTK)</strong> - For initial preprocessing and tokenization of tweets using the nltk.tokenize package.</p></li>
-<li><p><strong>GENSIM</strong> - For seamless transformation from a high dimensional "bag of words" (BOW) feature space to a lower dimensional "topic" space (each topic expresses discovered relations amongst the words in the Tweet data set using Latent Semantic Indexing or LSI).</p></li>
-<li><p><strong>Scikit-Learn</strong> - For trivial implementation the final Logistic Regression model which predicts "disaster" or "not disaster" based on each Tweets "topic" representation.</p></li>
+<li><p><strong>GENSIM</strong> - For seamless transformation from a high dimensional "bag of words" (BOW) feature space to a lower dimensional "topic" space via Latent Semantic Indexing or LSI.</p></li>
+<li><p><strong>Scikit-Learn</strong> - Fitting of final Logistic Regression classification model to "topics" represented tweets.</p></li>
 </ol>
 
 <h3>
@@ -95,13 +95,11 @@
 
 <hr>
 
-<p><strong>Low frequency words</strong>: occur <em>once</em> in the whole cleaned and tokenized tweet data set.</p>
+<p><strong>Low frequency words</strong>: occur <em>once</em> in the whole cleaned and tokenized tweet data set (also for unknown words).</p>
 
 <p><strong>High frequency words</strong>: occur greater than <em>once</em> in the whole cleaned and tokenized tweet data set.</p>
 
-<p><strong>NOTE</strong>: low frequency words also encompass those with no occurrence (as in a new tweet outside of the dataset). Word2vec would be used to map in that case as well.</p>
-
-<p>I use the pre-trained word2vec vectors from the Google News data set to quantify the similarity between two words. Low frequency <em>stemmed</em> tokens are replaced by most similar high frequency <em>stemmed</em> token (see cartoon).</p>
+<p>Employ pre-trained word2vec vectors from the Google News data set to quantify the similarity between two words. Low frequency <em>stemmed</em> tokens are replaced by most similar high frequency <em>stemmed</em> token (see cartoon).</p>
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/images/mapping_procedure.png" alt="mapping_visual2"></p>
 
@@ -110,10 +108,16 @@
 
 <hr>
 
-<p><strong>Some useful definitions:</strong>
-1. <strong>Bag of words (BOW)</strong>:  this is a vector representation of the form [1,0,0,2,4,0,...,0] where each dimension denotes a particular word and the number specifies how many times that word appears in a particular document (tweet in this case). There is a dimension for every word that appears at least twice (in this case) in the whole "corpus" of tweets (this is our "dictionary"). Since tweets are short the vectors are very sparse (mostly full of 0's). Please see <a href="https://en.wikipedia.org/wiki/Bag-of-words_model">https://en.wikipedia.org/wiki/Bag-of-words_model</a> for more details.
-2. <strong>Term frequency–inverse document frequency (TFIDF)</strong>: rescaled BOW vectors where each word count is penalized (shrunk) in accord with how many of the documents contains the word--effectively adjusting the word counts for how unique each word is. For example, "and" will be heavily penalized, reflecting low information content and common usage. Since this is just a rescaling of each BOW element the new vectors are of the same <em>high</em> dimensionality. Please see <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">https://en.wikipedia.org/wiki/Tf%E2%80%93idf</a> for more details.
-3. <strong>Latent semantic indexing (LSI)</strong>: through a standard mathematical scheme from linear algebra--singular value decomposition (SVD--the TFIDF vectors are mapped onto a user specified, smaller dimensional space where the new dimensions are linear combinations of the old TFIDF dimensions. These new dimensions (commonly called "topics") are constructed so that they describe as much variance in the data as possible with rapidly diminishing returns for each new dimension. The outcome is a much more compact vectorial representation of each tweet. Please see for <a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis">https://en.wikipedia.org/wiki/Latent_semantic_analysis</a> more details.</p>
+<p><strong>Some useful definitions:</strong></p>
+
+<ol>
+<li>
+<strong>Bag of words (BOW)</strong>:  this is a vector representation of the form [1,0,0,2,4,0,...,0] where each dimension denotes a particular word and the number specifies how many times that word appears in a particular document (tweet in this case). There is a dimension for every word that appears at least twice (in this case) in the whole "corpus" of tweets (this is our "dictionary"). Since tweets are short the vectors are very sparse (mostly full of 0's). Please see <a href="https://en.wikipedia.org/wiki/Bag-of-words_model">https://en.wikipedia.org/wiki/Bag-of-words_model</a> for more details.</li>
+<li>
+<strong>Term frequency–inverse document frequency (TFIDF)</strong>: rescaled BOW vectors where each word count is penalized (shrunk) in accord with how many of the documents contains the word--effectively adjusting the word counts for how unique each word is. For example, "and" will be heavily penalized, reflecting low information content and common usage. Since this is just a rescaling of each BOW element the new vectors are of the same <em>high</em> dimensionality. Please see <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">https://en.wikipedia.org/wiki/Tf%E2%80%93idf</a> for more details.</li>
+<li>
+<strong>Latent semantic indexing (LSI)</strong>: through a standard mathematical scheme from linear algebra--singular value decomposition (SVD--the TFIDF vectors are mapped onto a user specified, smaller dimensional space where the new dimensions are linear combinations of the old TFIDF dimensions. These new dimensions (commonly called "topics") are constructed so that they describe as much variance in the data as possible with rapidly diminishing returns for each new dimension. The outcome is a much more compact vectorial representation of each tweet. Please see for <a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis">https://en.wikipedia.org/wiki/Latent_semantic_analysis</a> more details.</li>
+</ol>
 
 <p><strong>Workflow</strong>
 1. Create a dictionary and corpus</p>
