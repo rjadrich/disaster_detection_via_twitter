@@ -209,17 +209,23 @@
 <p><strong>Parsing conjoined words</strong> (common to hashtags and "lazy" tweeters)</p>
 
 <ol>
-<li>Use Google book n-grams as a dictionary and to calculate word probabilities P(w)</li>
-<li>Recursively generate possible word splits </li>
-<li>Maximum likelihood monogram model: 
-log[P(w1, w2, ..., wN)] = log[P(w1)] + log[P(w2)] + ... + log[P(wN)]</li>
+<li>Google book n-grams &gt; dictionary &gt; word probabilities, <code>P(w) ~ f(w)</code> [frequency]</li>
+<li>Recursively generate word splits with smoothing (unrecognized words = unit frequency)</li>
+<li>Maximum likelihood monogram model: <code>log[P(w1, w2, ..., wN)] = log[P(w1)] + log[P(w2)] + ... + log[P(wN)]</code>
+</li>
 <li>Special token for failure: <strong>|-no_parse-|</strong>
 </li>
+<li>Could incorporate higher gram model</li>
 </ol>
 
 <p><strong>Spell checking</strong> (again, "lazy" tweeters)</p>
 
-<p>Use py</p>
+<p>Use PyEnchant 
+1. Correct with most likely spelling option
+2. Introduce <strong>|-m_spell-|</strong> for each misspelled word
+3. </p>
+
+<p><strong>Named entity recognition</strong></p>
 
 <p>appear in tweets, (2) spell checking for sparsity reduction combined with introduction of a special token to indicate
 a misspelling and (3) recognition of relevant named entities, e.g., news sources like NBC or CNN which may be
