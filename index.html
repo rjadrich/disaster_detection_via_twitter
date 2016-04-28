@@ -206,7 +206,7 @@
 
 <hr>
 
-<p><strong>Parsing conjoined words</strong> (common to hashtags and "lazy" tweeters)</p>
+<p><strong>Parsing conjoined words</strong> (common to hashtags)</p>
 
 <ol>
 <li>Google book n-grams &gt; dictionary &gt; word probabilities, <code>P(w) ~ # w</code>
@@ -218,23 +218,20 @@
 </li>
 </ol>
 
-<p><strong>Spell checking</strong> (again, "lazy" tweeters)</p>
+<p><strong>Spell checking</strong></p>
 
 <ol>
 <li>Use <a href="http://pythonhosted.org/pyenchant/tutorial.html">PyEnchant</a> to find most likely correction</li>
 <li>Introduce <strong>|-m_spell-|</strong> for each misspelled word</li>
+<li>Interface with conjoined word parser?</li>
 </ol>
-
-<p><em>Could interface with conjoined word parser</em></p>
 
 <p><strong>Named entity recognition</strong></p>
 
 <ol>
-<li><p>Employ Stanford Named Entity Recognition Tagger (via <a href="http://www.nltk.org/api/nltk.tag.html#module-nltk.tag.stanford">NLTK</a>)</p></li>
-<li><p>Introduce tokens for <strong>persons</strong>, <strong>places</strong>, <strong>organizations</strong>, etc.</p></li>
+<li>Employ Stanford Named Entity Recognition Tagger (via <a href="http://www.nltk.org/api/nltk.tag.html#module-nltk.tag.stanford">NLTK</a>)</li>
+<li>Introduce tokens for <strong>persons</strong>, <strong>places</strong>, <strong>organizations</strong>, etc.</li>
 </ol>
-
-<p><em>Will capture more general tweet structure</em></p>
 
 <hr>
 
