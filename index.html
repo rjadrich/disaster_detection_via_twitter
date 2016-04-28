@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Disaster detection via twitter by rjadrich</title>
+    <title>Disaster Detection via Twitter by rjadrich</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/github-light.css">
@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Disaster detection via twitter</h1>
+        <h1>Disaster Detection via Twitter</h1>
         <p>Predictive classification model for determining if a Tweet is discussing a disaster event (i.e., building collapse, wildfire, terrorist attack)</p>
 
         <p class="view"><a href="https://github.com/rjadrich/disaster_detection_via_twitter">View the Project on GitHub <small>rjadrich/disaster_detection_via_twitter</small></a></p>
@@ -202,7 +202,7 @@
 <hr>
 
 <h3>
-<a id="8-improving-tokenization" class="anchor" href="#8-improving-tokenization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>8. Improving Tokenization</h3>
+<a id="8-improving-tokenization" class="anchor" href="#8-improving-tokenization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>8. Improving tokenization</h3>
 
 <hr>
 
@@ -221,15 +221,14 @@
 
 <p><strong>Spell checking</strong> (again, "lazy" tweeters)</p>
 
-<p>Use PyEnchant 
-1. Correct with most likely spelling option
+<p><img src="http://pythonhosted.org/pyenchant/tutorial.html" alt="PyEnchant">
+1. Correct with most likely correction
 2. Introduce <strong>|-m_spell-|</strong> for each misspelled word
-3. </p>
+<em>Could interface with conjoined word parser</em></p>
 
 <p><strong>Named entity recognition</strong></p>
 
-<p>appear in tweets, (2) spell checking for sparsity reduction combined with introduction of a special token to indicate
-a misspelling and (3) recognition of relevant named entities, e.g., news sources like NBC or CNN which may be
+<p>recognition of relevant named entities, e.g., news sources like NBC or CNN which may be
 particularly relevant to disasters. Combined, the various steps I have proposed should lead to an enhanced
 predictive model with greater generalizability. This will be explicitly tested on a small, (of order 100) untrained, selflabeled
 set of tweets with high temporal and disaster type variation. The final pipeline of tweet &gt;
