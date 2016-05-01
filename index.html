@@ -16,7 +16,7 @@
     <div class="wrapper">
       <header>
         <h1>Disaster Detection via Twitter</h1>
-        <p>Predictive classification model for determining if a Tweet is discussing a disaster event</p>
+        <p>Predictive classification model for determining if a Tweet is discussing a disaster event (i.e., building collapse, wildfire, terrorist attack)</p>
 
         <p class="view"><a href="https://github.com/rjadrich/disaster_detection_via_twitter">View the Project on GitHub <small>rjadrich/disaster_detection_via_twitter</small></a></p>
 
@@ -26,25 +26,6 @@
           <li><a href="https://github.com/rjadrich/disaster_detection_via_twitter/tarball/master">Download <strong>TAR Ball</strong></a></li>
           <li><a href="https://github.com/rjadrich/disaster_detection_via_twitter">View On <strong>GitHub</strong></a></li>
         </ul>
-        
-        <hr>
-        
-        
-        
-        <h3><a id="project-links" class="anchor" href="#project-links" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sections</h3>
-        <p class="view">
-          <a href="#1-project-summary">Project summary | </a>
-          <a href="#2-tweet-preparation">Tweet preparation | </a>
-          <a href="#3-mapping-uncommon-words">Mapping uncommon words | </a>
-          <a href="#4-tweet-topic-generation">Tweet topic generation |</a>
-          <a href="#5-accuracy-and-number-of-topics">Accuracy and number of topics | </a>
-          <a href="#6-model-class-separability">Model class separability | </a>
-          <a href="#7-explore-the-topics">Explore the topics | </a>
-          <a href="#8-improving-tokenization">Improving tokenization | </a>
-          <a href="#9-improving-topic-vocabulary">Improving topic vocabulary</a>
-        </p>
-        
-        
       </header>
       <section>
         <hr>
@@ -85,9 +66,12 @@
 <ul>
 <li>Keep handles (username) and hashtags and reduce length (e.g., looooooovvvvveeee to looovvveee)</li>
 <li>@ and # are separated from text</li>
-<li>Split # text according to normal format (#CarCrash or #TexasTornado)</li>
 </ul>
 </li>
+<li>
+<strong>(New)</strong> Split @ and # text using token splitting tool (more below)</li>
+<li>
+<strong>(New)</strong> Map <a href="http://www.datagenetics.com/blog/october52012/index.html">top 90%</a> of emoticons to <strong>|-happy-|</strong>, <strong>|-sad-|</strong> or <strong>|-inert-|</strong> tokens</li>
 <li>Introduce special tokens
 
 <ul>
@@ -103,13 +87,6 @@
 <strong>|-num_scales-|</strong> for hundred, thousand, ..., billion</li>
 <li>
 <strong>|-website-|</strong> for any hyperlinks</li>
-</ul>
-</li>
-<li>Simplify common face emoticons down to just eyes and mouth (nose does not really convey emotion) and normalize (eyes first mouth second)
-
-<ul>
-<li>Most common eyes : ; = 8</li>
-<li>Most common mouths ( ) [ ] d p { } / @ |</li>
 </ul>
 </li>
 <li>Stem words using NLTK Porter stemmer (e.g., fires becomes fire)</li>
@@ -145,7 +122,7 @@
 
 <hr>
 
-<p><strong>Some useful definitions:</strong></p>
+<p><strong>Steps:</strong></p>
 
 <ol>
 <li>
@@ -173,7 +150,7 @@
 
 <p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/cross_validation.png" alt="cross validation"></p>
 
-<p><strong>Conclusion</strong>: Overall, D=250 seems good. I use this dimensionality from here onward.</p>
+<p><strong>Conclusion</strong>: CV accuracy of ~88% near D=250. I use this dimensionality from here onward.</p>
 
 <p> </p>
 
@@ -227,15 +204,19 @@
 
 <p><strong>Parsing conjoined words</strong> (common to hashtags)</p>
 
+<p>This has been developed and implemented since challenge (and still improving)</p>
+
 <ol>
-<li>Google book n-grams &gt; dictionary &gt; word probabilities, <code>P(w) ~ # w</code>
+<li>Corpus &gt; word probabilities, <code>P(w) ~ # w</code>
 </li>
 <li>Recursively generate word splits with smoothing (unrecognized words = unit frequency)</li>
 <li>Maximum likelihood monogram model: <code>log[P(w1, w2, ..., wN)] = log[P(w1)] + log[P(w2)] + ... + log[P(wN)]</code>
 </li>
-<li>Special token for failure: <strong>|-no_parse-|</strong>
-</li>
 </ol>
+
+<p><a href="">Click for demo using the Brown corpus</a> </p>
+
+<p>Final model will use the huge <a href="http://clic.cimec.unitn.it/amac/twitter_ngram/">Rovereto Twitter Corpus</a></p>
 
 <p><strong>Spell checking</strong></p>
 
