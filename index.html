@@ -148,7 +148,7 @@
 
 <p><strong>Model used</strong>: logistic regression (well suited to high dimensional problems).</p>
 
-<p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/cross_validation.png" alt="cross validation"></p>
+<p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/cross_validation_adv_parse.png" alt="cross validation"></p>
 
 <p><strong>Conclusion</strong>: CV accuracy of ~88% near D=250. I use this dimensionality from here onward.</p>
 
@@ -163,7 +163,7 @@
 
 <p><strong>Receiver operating characteristic (ROC) curve:</strong></p>
 
-<p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/roc.png" alt="ROC analysis"></p>
+<p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/roc_adv_parse.png" alt="ROC analysis"></p>
 
 <p><strong>NOTE</strong>: May want to tune threshold towards more false disaster predictions (better safe than sorry).</p>
 
@@ -178,20 +178,20 @@
 
 <p><strong>Top 10 topics with the top ten tokens</strong></p>
 
-<p><code>Topic 0: 0.426*"?" + 0.234*"#" + 0.205*"@" + 0.196*"|-no_w2v-|" + 0.188*"'" + 0.185*"." + 0.183*"the" + 0.160*"|-num-|" + 0.158*"i" + 0.156*"a"</code></p>
+<p><code>Topic 0: 0.403*"?" + 0.237*"#" + 0.196*"'" + 0.185*"the" + 0.184*"." + 0.177*"a" + 0.170*"i" + 0.168*"@" + 0.167*"|-num-|" + 0.149*":"</code></p>
 
-<p><code>Topic 1: -0.808*"?" + 0.160*"|-num-|" + 0.159*"'" + 0.148*":" + 0.127*"#" + 0.110*"of" + 0.107*"in" + 0.096*"|-website-|" + 0.093*"famili" + 0.093*"..."</code></p>
+<p><code>Topic 1: -0.826*"?" + 0.156*"'" + 0.147*"|-num-|" + 0.145*":" + 0.106*"#" + 0.105*"of" + 0.098*"famili" + 0.098*"in" + 0.092*"by" + 0.091*"|-website-|"</code></p>
 
 <h3>
 <a id="" class="anchor" href="#" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>...</h3>
 
-<p><code>Topic 9: -0.242*"kill" + 0.231*"#" + 0.222*"!" + 0.212*"|-num_alpha-|" + -0.208*"obama" + -0.203*"declar" + -0.203*"disast" + -0.173*"|-num_units-|" + 0.167*"bomb" + -0.150*"for"</code></p>
+<p><code>Topic 5: 0.298*"suicid" + 0.266*"bomber" + 0.210*"bomb" + 0.201*"kill" + 0.191*"#" + 0.177*"mosqu" + 0.172*"saudi" + 0.172*"|-num-|" + 0.148*"?" + 0.146*"pkk"</code></p>
 
-<p><code>Topic 10: -0.463*"!" + -0.321*"obama" + -0.312*"declar" + -0.287*"disast" + -0.208*"for" + -0.200*"@" + -0.185*"saipan" + -0.184*"typhoon" + 0.180*"." + -0.166*"devast"</code></p>
+<p><code>Topic 6: 0.569*"#" + -0.198*"bomb" + -0.196*"suicid" + -0.184*"bomber" + -0.156*"pkk" + -0.152*"turkey" + -0.152*"trench" + -0.151*"deton" + -0.146*"old" + 0.140*"|-num-|"</code></p>
 
-<p><strong>Topic 1 = non-disaster and  Topic 2 = disaster???</strong></p>
+<p><strong>Topic 1 = non-disaster and  Topic 5 = disaster???</strong></p>
 
-<p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/topics.png" alt="Topics"></p>
+<p><img src="https://raw.githubusercontent.com/rjadrich/disaster_detection_via_twitter/master/data/cv_and_roc_data/topics-adv_parse.png" alt="Topics"></p>
 
 <p> </p>
 
@@ -207,7 +207,7 @@
 <p>This has been developed and implemented since challenge (and still improving)</p>
 
 <ol>
-<li>Corpus &gt; word probabilities, <code>P(w) ~ # w</code>
+<li>Corpus &gt; word probabilities, <code>P(w) ~ frequency</code>
 </li>
 <li>Recursively generate word splits with smoothing (unrecognized words = unit frequency)</li>
 <li>Maximum likelihood monogram model: <code>log[P(w1, w2, ..., wN)] = log[P(w1)] + log[P(w2)] + ... + log[P(wN)]</code>
