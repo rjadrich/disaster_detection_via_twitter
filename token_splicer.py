@@ -1,12 +1,20 @@
 #this is a class for splitting tweet hastags and or usernames
 from numpy import log
 from copy import deepcopy
+from nltk.corpus import brown
 
 class Token_Splicer:
 
-    def __init__(self):
+    def __init__(self, use_brown = True):
         self.frequencies = {} #store our freq count for each word
         self.split_sequence_locker = {} #save any unique recursive string split sequences
+        
+        if use_brown:
+            modified_brown = [word.lower() for word in brown.words() 
+                  if (len(word) > 2 or word.lower() 
+                      in ("a i an as at be bi by do he hi if in is it " +
+                      "me my no of or on so to up us we").split(" "))]
+            self.make_freq(modified_brown)
 
     def make_freq(self, word_bank): #generates the freq count for each words by sending in the word bank
         word_bank_L = [word for word in word_bank]
