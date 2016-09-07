@@ -226,5 +226,42 @@ class Tokenizer:
                 [split_tweet_return.append(tag_comp) for tag_comp in split.max_prob_split([entry[1:].lower()], num_breaks)]
             else:
                 split_tweet_return.append(entry)
-        return split_tweet_return
+        return split_tweet_return    
+    
+    #performs all of the above functions in one fell swoop
+    def tweet_to_tokens(self, tweet):
+        #convert some common utf8 hyphen and apostrophe symbols to ascii 
+        tweet = self.utf8_to_ascii(deepcopy(tweet))
+    
+        #go through and convert or remove any remaining utf8 characters
+        #remove_utf8 = lambda x: x.decode("utf8").encode('ascii',  errors='ignore')
+        tweet = self.remove_utf8(deepcopy(tweet))
+    
+        #clean up any html tags
+        html_parser = HTMLParser.HTMLParser()
+        tweet = html_parser.unescape(deepcopy(tweet))
+        
+        #perform initial tokenization
+        tokenized_tweet = self.tokenize(deepcopy(tweet))
+        
+        #split up the tags
+        tokenized_tweet = self.clean_tags(deepcopy(tokenized_tweet))
+        
+        #group emoticons
+        tokenized_tweet = self.classify_emoticons(deepcopy(tokenized_tweet))
+        
+        #special tokens
+        tokenized_tweet = self.special_tokens(deepcopy(tokenized_tweet))
+        
+        #word reduce
+        tokenized_tweet = self.shorten_words(deepcopy(tokenized_tweet))
+        
+        #go through and stem everything using the Porter Stemmer
+        st = PorterStemmer()
+        stem_words = lambda x: [st.stem(entry) for entry in x]
+        tokenized_tweet = stem_words(deepcopy(tokenized_tweet))
+        
+        return tokenized_tweet
+    
+    
          
