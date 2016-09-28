@@ -54,7 +54,7 @@ class latent_semantic_indexer:
         df_features = pd.DataFrame(data = features)
     
         #create a merged dataframe from the input (the indicies should match since I reset them earlier on)
-        df_merged = pd.concat([df, df_features], axis=1)
+        df_merged = pd.concat([df["choose_one"], df_features], axis=1)
         
         #create index for similarity query
         self.index = similarities.MatrixSimilarity(self.corpus_lsi, num_features = num_topics)
